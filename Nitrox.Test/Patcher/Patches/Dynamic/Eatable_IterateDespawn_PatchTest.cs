@@ -8,13 +8,13 @@ using NitroxTest.Patcher;
 namespace NitroxPatcher.Patches.Dynamic;
 
 [TestClass]
-public class SpawnConsoleCommand_OnConsoleCommand_PatchTest
+public class Eatable_IterateDespawn_PatchTest
 {
     [TestMethod]
     public void Sanity()
     {
-        IEnumerable<CodeInstruction> originalIl = PatchTestHelper.GetInstructionsFromMethod(SpawnConsoleCommand_OnConsoleCommand_Patch.TARGET_METHOD);
-        IEnumerable<CodeInstruction> transformedIl = SpawnConsoleCommand_OnConsoleCommand_Patch.Transpiler(originalIl);
+        IEnumerable<CodeInstruction> originalIl = PatchTestHelper.GetInstructionsFromMethod(Eatable_IterateDespawn_Patch.TARGET_METHOD);
+        IEnumerable<CodeInstruction> transformedIl = Eatable_IterateDespawn_Patch.Transpiler(originalIl);
         transformedIl.Count().Should().Be(originalIl.Count() + 2);
     }
 }

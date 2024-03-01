@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NitroxClient.Communication.Abstract;
 using NitroxClient.Communication.Packets.Processors;
 using NitroxClient.MonoBehaviours;
@@ -7,7 +7,6 @@ using NitroxModel.Packets;
 using NitroxModel_Subnautica.DataStructures.GameLogic;
 using NitroxModel_Subnautica.Packets;
 using UnityEngine;
-using static NitroxModel.DisplayStatusCodes;
 
 namespace NitroxClient.GameLogic
 {
@@ -103,7 +102,8 @@ namespace NitroxClient.GameLogic
 
                 if (existingFire.TryGetNitroxId(out NitroxId existingFireId) && existingFireId != fireData.CyclopsId)
                 {
-                    DisplayStatusCode(StatusCode.INVALID_FUNCTION_CALL, false, $"[Fires.Create Fire already exists at node index {fireData.NodeIndex}! Replacing existing Fire Id {existingFireId} with Id {fireData.CyclopsId}]");
+                    Log.Error($"[Fires.Create Fire already exists at node index {fireData.NodeIndex}! Replacing existing Fire Id {existingFireId} with Id {fireData.CyclopsId}]");
+
                     NitroxEntity.SetNewId(existingFire.gameObject, fireData.CyclopsId);
                 }
 
@@ -128,7 +128,8 @@ namespace NitroxClient.GameLogic
             }
             else
             {
-                DisplayStatusCode(StatusCode.SUBNAUTICA_ERROR, false, $"[{nameof(CyclopsFireCreatedProcessor)} Cannot create new Cyclops fire! PrefabSpawn component could not be found in fire node! Fire Id: {fireData.FireId} SubRoot Id: {fireData.CyclopsId} Room: {fireData.Room} NodeIndex: {fireData.NodeIndex}]");
+                Log.Error(
+                    $"[{nameof(CyclopsFireCreatedProcessor)} Cannot create new Cyclops fire! PrefabSpawn component could not be found in fire node! Fire Id: {fireData.FireId} SubRoot Id: {fireData.CyclopsId} Room: {fireData.Room} NodeIndex: {fireData.NodeIndex}]");
             }
 
             component.SpawnManual(delegate(GameObject fireGO)

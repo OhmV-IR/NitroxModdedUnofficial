@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using NitroxClient.Communication.Abstract;
 using NitroxModel.Helper;
 using NitroxModel.MultiplayerSession;
 using NitroxModel.Packets;
-using static NitroxModel.DisplayStatusCodes;
+
 namespace NitroxClient.Communication.MultiplayerSession.ConnectionState
 {
     public class AwaitingReservationCredentials : ConnectionNegotiatingState
@@ -56,7 +56,7 @@ namespace NitroxClient.Communication.MultiplayerSession.ConnectionState
         {
             if (!sessionConnectionContext.Client.IsConnected)
             {
-                DisplayStatusCode(StatusCode.INVALID_PACKET, false, "The client is not connected.");
+                throw new InvalidOperationException("The client is not connected.");
             }
         }
 
@@ -68,7 +68,7 @@ namespace NitroxClient.Communication.MultiplayerSession.ConnectionState
             }
             catch (ArgumentNullException ex)
             {
-                DisplayStatusCode(StatusCode.INVALID_PACKET, false, "The context does not contain player settings." + ex);
+                throw new InvalidOperationException("The context does not contain player settings.", ex);
             }
         }
 
@@ -80,7 +80,7 @@ namespace NitroxClient.Communication.MultiplayerSession.ConnectionState
             }
             catch (ArgumentNullException ex)
             {
-                DisplayStatusCode(StatusCode.INVALID_PACKET, false, "The context does not contain an authentication context." + ex);
+                throw new InvalidOperationException("The context does not contain an authentication context.", ex);
             }
         }
     }

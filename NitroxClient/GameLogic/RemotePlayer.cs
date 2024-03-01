@@ -12,8 +12,6 @@ using NitroxModel.MultiplayerSession;
 using NitroxModel.Server;
 using UnityEngine;
 using UWE;
-using static NitroxModel.DisplayStatusCodes;
-using Object = UnityEngine.Object;
 
 namespace NitroxClient.GameLogic;
 
@@ -150,7 +148,7 @@ public class RemotePlayer : INitroxPlayer
             // For unexpected and expected cases, for example when a player is driving a cyclops but the cyclops is destroyed
             if (!SubRoot)
             {
-                DisplayStatusCode(StatusCode.SUBNAUTICA_ERROR, false, "Player changed PilotingChair but is not in SubRoot!");
+                Log.Error("Player changed PilotingChair but is not in SubRoot!");
             }
             else
             {
@@ -332,7 +330,7 @@ public class RemotePlayer : INitroxPlayer
         }
         else
         {
-            DisplayStatusCode(StatusCode.SUBNAUTICA_ERROR, false, "The main collider of the main Player couldn't be found or is not a CapsuleCollider. Collisions for the RemotePlayer won't be created");
+            Log.Warn("The main collider of the main Player couldn't be found or is not a CapsuleCollider. Collisions for the RemotePlayer won't be created");
         }
     }
 
@@ -378,7 +376,7 @@ public class RemotePlayer : INitroxPlayer
         }
         else
         {
-            DisplayStatusCode(StatusCode.DEPENDENCY_FAIL, false, $"[{nameof(RemotePlayer)}] Manual created FMOD emitter for {nameof(PlayerBreathBubbles)} but linked sound is not whitelisted: ({bubblesCustomEmitter.asset.path})");
+            Log.Error($"[{nameof(RemotePlayer)}] Manual created FMOD emitter for {nameof(PlayerBreathBubbles)} but linked sound is not whitelisted: ({bubblesCustomEmitter.asset.path})");
         }
 
         // Breathing
@@ -392,7 +390,7 @@ public class RemotePlayer : INitroxPlayer
         }
         else
         {
-            DisplayStatusCode(StatusCode.DEPENDENCY_FAIL, false, $"[{nameof(RemotePlayer)}] Manual created FMOD emitter for {nameof(BreathingSound)} but linked sound is not whitelisted: ({breathingSoundCustomEmitter.asset.path})");
+            Log.Error($"[{nameof(RemotePlayer)}] Manual created FMOD emitter for {nameof(BreathingSound)} but linked sound is not whitelisted: ({breathingSoundCustomEmitter.asset.path})");
         }
 
         // Diving
@@ -406,7 +404,7 @@ public class RemotePlayer : INitroxPlayer
         }
         else
         {
-            DisplayStatusCode(StatusCode.DEPENDENCY_FAIL, false, $"[{nameof(RemotePlayer)}] Manual created FMOD emitter for {nameof(WaterAmbience)} but linked sound is not whitelisted: ({diveStartCustomEmitter.asset.path})");
+            Log.Error($"[{nameof(RemotePlayer)}] Manual created FMOD emitter for {nameof(WaterAmbience)} but linked sound is not whitelisted: ({diveStartCustomEmitter.asset.path})");
         }
     }
 

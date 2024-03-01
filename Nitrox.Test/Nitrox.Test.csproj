@@ -22,10 +22,6 @@
         <ProjectReference Include="..\NitroxServer\NitroxServer.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Reference Include="System.Windows.Forms" />
-    </ItemGroup>
-
     <Target Name="MoveNitroxAssetsToTestOutput" AfterTargets="Build" Condition="'$(OS)' == 'Windows_NT'">
         <ItemGroup>
             <NitroxSubnauticaAssets Include="..\Nitrox.Assets.Subnautica\**\*." />

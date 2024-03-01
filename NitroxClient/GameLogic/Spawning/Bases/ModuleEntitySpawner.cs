@@ -13,7 +13,6 @@ using NitroxModel.DataStructures.GameLogic.Entities.Bases;
 using NitroxModel.DataStructures.Util;
 using NitroxModel_Subnautica.DataStructures;
 using UnityEngine;
-using static NitroxModel.DisplayStatusCodes;
 
 namespace NitroxClient.GameLogic.Spawning.Bases;
 
@@ -30,7 +29,7 @@ public class ModuleEntitySpawner : EntitySpawner<ModuleEntity>
     {
         if (NitroxEntity.TryGetObjectFrom(entity.Id, out GameObject gameObject) && gameObject)
         {
-            DisplayStatusCode(StatusCode.INVALID_FUNCTION_CALL, true, "Trying to respawn an already spawned module without a proper resync process.");
+            Log.Error("Trying to respawn an already spawned module without a proper resync process.");
             yield break;
         }
         Transform parent = BuildingHandler.GetParentOrGlobalRoot(entity.ParentId);
@@ -39,7 +38,7 @@ public class ModuleEntitySpawner : EntitySpawner<ModuleEntity>
 
         if (!result.Get().HasValue)
         {
-            DisplayStatusCode(StatusCode.SUBNAUTICA_ERROR, false, $"Module couldn't be spawned {entity}");
+            Log.Error($"Module couldn't be spawned {entity}");
             yield break;
         }
         GameObject moduleObject = result.Get().Value;
@@ -68,7 +67,7 @@ public class ModuleEntitySpawner : EntitySpawner<ModuleEntity>
             yield return DefaultWorldEntitySpawner.RequestPrefab(moduleEntity.ClassId, prefabResult);
             if (!prefabResult.Get())
             {
-                DisplayStatusCode(StatusCode.SUBNAUTICA_ERROR, false, $"Couldn't find a prefab for module of ClassId {moduleEntity.ClassId}");
+                Log.Error($"Couldn't find a prefab for module of ClassId {moduleEntity.ClassId}");
                 yield break;
             }
             prefab = prefabResult.Get();

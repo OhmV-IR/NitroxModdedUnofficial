@@ -11,7 +11,7 @@ using Microsoft.Win32;
 using NitroxModel.Helper;
 using NitroxModel_Subnautica.Logger;
 using UnityEngine;
-using static NitroxModel.DisplayStatusCodes;
+
 namespace NitroxPatcher;
 
 public static class Main
@@ -65,7 +65,7 @@ public static class Main
 
         if (nitroxLauncherDir.Value == null)
         {
-            DisplayStatusCode(StatusCode.INVALID_INSTALL, true, "Nitrox will not load because launcher path was not provided.");
+            Console.WriteLine("Nitrox will not load because launcher path was not provided.");
             return;
         }
 
@@ -114,7 +114,7 @@ public static class Main
         }
         catch (Exception ex)
         {
-            DisplayStatusCode(StatusCode.INJECTION_FAIL, true, ex.ToString() + "Unhandled exception occurred while initializing Nitrox");
+            // Placeholder for popup gui
             Log.Error(ex, "Unhandled exception occurred while initializing Nitrox:");
         }
     }
@@ -141,7 +141,7 @@ public static class Main
 
         if (!File.Exists(dllPath))
         {
-            DisplayStatusCode(StatusCode.FILE_SYSTEM_ERR, true, $"Nitrox dll missing: {dllPath}");
+            Console.WriteLine($"Nitrox dll missing: {dllPath}");
         }
         return Assembly.LoadFile(dllPath);
     }

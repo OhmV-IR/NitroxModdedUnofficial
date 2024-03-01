@@ -1,10 +1,10 @@
-using NitroxClient.Communication.Packets.Processors.Abstract;
+﻿using NitroxClient.Communication.Packets.Processors.Abstract;
 using NitroxClient.GameLogic;
 using NitroxClient.MonoBehaviours;
 using NitroxModel_Subnautica.DataStructures;
 using NitroxModel_Subnautica.Packets;
 using UnityEngine;
-using static NitroxModel.DisplayStatusCodes;
+
 namespace NitroxClient.Communication.Packets.Processors;
 
 public class ExosuitArmActionProcessor : ClientPacketProcessor<ExosuitArmActionPacket>
@@ -13,7 +13,7 @@ public class ExosuitArmActionProcessor : ClientPacketProcessor<ExosuitArmActionP
     {
         if (!NitroxEntity.TryGetObjectFrom(packet.ArmId, out GameObject gameObject))
         {
-            DisplayStatusCode(StatusCode.SUBNAUTICA_ERROR, false, "Could not find ExosuitArm");
+            Log.Error("Could not find exosuit arm");
             return;
         }
 
@@ -32,7 +32,7 @@ public class ExosuitArmActionProcessor : ClientPacketProcessor<ExosuitArmActionP
                 ExosuitModuleEvent.UseTorpedo(gameObject.GetComponent<ExosuitTorpedoArm>(), packet.ArmAction, packet.OpVector?.ToUnity(), packet.OpRotation?.ToUnity());
                 break;
             default:
-                DisplayStatusCode(StatusCode.INVALID_PACKET, false, $"Got an arm tech that is not handled: {packet.TechType} with action: {packet.ArmAction} for id {packet.ArmId}");
+                Log.Error($"Got an arm tech that is not handled: {packet.TechType} with action: {packet.ArmAction} for id {packet.ArmId}");
                 break;
         }
     }

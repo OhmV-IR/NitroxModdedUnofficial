@@ -10,7 +10,6 @@ using NitroxModel.Helper;
 using NitroxModel_Subnautica.DataStructures;
 using UnityEngine;
 using UWE;
-using static NitroxModel.DisplayStatusCodes;
 
 namespace NitroxClient.GameLogic.Spawning.WorldEntities;
 
@@ -76,7 +75,7 @@ public class SerializedWorldEntitySpawner : IWorldEntitySpawner, IWorldEntitySyn
             Type cachedType = ProtobufSerializer.GetCachedType(typeName);
             if (!typesWhitelist.Contains(cachedType))
             {
-                DisplayStatusCode(StatusCode.INVALID_PACKET, false, $"Server asked to instantiate a non-whitelisted type {typeName}.");
+                Log.ErrorOnce($"Server asked to instantiate a non-whitelisted type {typeName}.");
                 return true;
             }
 
@@ -89,7 +88,7 @@ public class SerializedWorldEntitySpawner : IWorldEntitySpawner, IWorldEntitySyn
             }
             else
             {
-                DisplayStatusCode(StatusCode.INVALID_PACKET, false, $"Deserializing component {typeName} into {gameObject} failed");
+                Log.ErrorOnce($"Deserializing component {typeName} into {gameObject} failed");
             }
             ProtobufSerializer.SetIsEnabled(orAddComponent, serializedComponent.IsEnabled);
         }

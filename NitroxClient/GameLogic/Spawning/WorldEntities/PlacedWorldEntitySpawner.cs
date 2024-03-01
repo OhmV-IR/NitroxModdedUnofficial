@@ -5,7 +5,6 @@ using NitroxModel.DataStructures.GameLogic.Entities;
 using NitroxModel.DataStructures.Util;
 using NitroxModel_Subnautica.DataStructures;
 using UnityEngine;
-using static NitroxModel.DisplayStatusCodes;
 
 namespace NitroxClient.GameLogic.Spawning.WorldEntities;
 
@@ -26,7 +25,7 @@ public class PlacedWorldEntitySpawner : SyncEntitySpawner<PlacedWorldEntity>
             yield return DefaultWorldEntitySpawner.RequestPrefab(entity.ClassId, prefabResult);
             if (!prefabResult.Get())
             {
-                DisplayStatusCode(StatusCode.SUBNAUTICA_ERROR, false, $"Couldn't find a prefab for {nameof(OxygenPipeEntity)} of ClassId {entity.ClassId}");
+                Log.Error($"Couldn't find a prefab for {nameof(OxygenPipeEntity)} of ClassId {entity.ClassId}");
                 yield break;
             }
             prefab = prefabResult.Get();
@@ -84,7 +83,7 @@ public class PlacedWorldEntitySpawner : SyncEntitySpawner<PlacedWorldEntity>
         {
             return true;
         }
-        DisplayStatusCode(StatusCode.SUBNAUTICA_ERROR, false, $"Couldn't find component {nameof(PlaceTool)} on prefab with ClassId: {entity.ClassId}");
+        Log.Error($"Couldn't find component {nameof(PlaceTool)} on prefab with ClassId: {entity.ClassId}");
         return false;
     }
 

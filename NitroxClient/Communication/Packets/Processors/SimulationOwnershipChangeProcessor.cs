@@ -2,8 +2,7 @@ using NitroxClient.Communication.Packets.Processors.Abstract;
 using NitroxClient.GameLogic;
 using NitroxModel.DataStructures;
 using NitroxModel.Packets;
-using UnityEngine;
-using static NitroxModel.DisplayStatusCodes;
+
 namespace NitroxClient.Communication.Packets.Processors;
 
 public class SimulationOwnershipChangeProcessor : ClientPacketProcessor<SimulationOwnershipChange>

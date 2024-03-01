@@ -8,7 +8,7 @@ using NitroxClient.MonoBehaviours;
 using NitroxClient.Unity.Helper;
 using NitroxModel.DataStructures.GameLogic;
 using NitroxModel.Packets;
-using static NitroxModel.DisplayStatusCodes;
+
 namespace NitroxClient.GameLogic.InitialSync;
 
 public class PlayerPreferencesInitialSyncProcessor : InitialSyncProcessor
@@ -128,7 +128,8 @@ public class PlayerPreferencesInitialSyncProcessor : InitialSyncProcessor
             pingKey = string.Empty;
             return false;
         }
-        DisplayStatusCode(StatusCode.SUBNAUTICA_ERROR, false, $"Couldn't find PingInstance identifier for {pingInstance.name} under {pingInstance.transform.parent}");
+
+        Log.Warn($"Couldn't find PingInstance identifier for {pingInstance.name} under {pingInstance.transform.parent}");
         pingKey = string.Empty;
         return false;
     }

@@ -1,8 +1,7 @@
 using System;
 using NitroxClient.Unity.Helper;
-using NitroxModel;
 using UnityEngine;
-using static NitroxModel.DisplayStatusCodes;
+
 namespace NitroxClient.MonoBehaviours.Overrides
 {
     public class MultiplayerBench : Bench
@@ -56,16 +55,12 @@ namespace NitroxClient.MonoBehaviours.Overrides
                 Side.LEFT => new Vector3(-0.75f, 0.082f, 0),
                 Side.CENTER => new Vector3(0, 0.082f, 0),
                 Side.RIGHT => new Vector3(0.75f, 0.082f, 0),
-                _ => throwInvalidVariableException()
+                _ => throw new ArgumentOutOfRangeException()
             };
 
             base.OnHandClick(hand);
         }
-        private Vector3 throwInvalidVariableException()
-        {
-            DisplayStatusCode(StatusCode.INVALID_VARIABLE_VAL, false, "A variable had an invalid value");
-            return new Vector3();
-        }
+
         public enum Side
         {
             LEFT,

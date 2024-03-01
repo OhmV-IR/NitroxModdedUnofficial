@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 using NitroxClient.Communication.Abstract;
-using static NitroxModel.DisplayStatusCodes;
+
 namespace NitroxClient.Communication.MultiplayerSession.ConnectionState
 {
     public class SessionJoined : ConnectionNegotiatedState
@@ -9,7 +9,7 @@ namespace NitroxClient.Communication.MultiplayerSession.ConnectionState
 
         public override void JoinSession(IMultiplayerSessionConnectionContext sessionConnectionContext)
         {
-            DisplayStatusCode(StatusCode.OUTBOUND_CONNECTION_ALREADY_OPEN, false, "The session is already in progress.");
+            throw new InvalidOperationException("The session is already in progress.");
         }
     }
 }

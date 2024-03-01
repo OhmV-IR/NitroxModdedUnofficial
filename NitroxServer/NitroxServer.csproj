@@ -6,6 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\NitroxModel\NitroxModel.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
         <Reference Include="protobuf-net, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
             <HintPath>..\Nitrox.Assets.Subnautica\protobuf-net.dll</HintPath>
         </Reference>
@@ -13,10 +17,6 @@
 
     <ItemGroup>
       <Folder Include="GameLogic\Vehicles\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\NitroxModel\NitroxModel.csproj" />
     </ItemGroup>
 
 </Project>

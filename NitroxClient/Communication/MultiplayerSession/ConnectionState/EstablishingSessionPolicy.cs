@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using NitroxClient.Communication.Abstract;
 using NitroxModel.Helper;
 using NitroxModel.Packets.Exceptions;
-using static NitroxModel.DisplayStatusCodes;
+
 namespace NitroxClient.Communication.MultiplayerSession.ConnectionState
 {
     public class EstablishingSessionPolicy : ConnectionNegotiatingState
@@ -47,7 +47,7 @@ namespace NitroxClient.Communication.MultiplayerSession.ConnectionState
             }
             catch (ArgumentNullException ex)
             {
-                DisplayStatusCode(StatusCode.INVALID_PACKET, false, "The context is missing a session policy." + ex.ToString());
+                throw new InvalidOperationException("The context is missing a session policy.", ex);
             }
         }
 
@@ -55,7 +55,7 @@ namespace NitroxClient.Communication.MultiplayerSession.ConnectionState
         {
             if (!policyRequestCorrelationId.Equals(sessionConnectionContext.SessionPolicy.CorrelationId))
             {
-                DisplayStatusCode(StatusCode.INVALID_PACKET, false, "The packet was uncorrelated to the function of this processor: ");
+                throw new UncorrelatedPacketException(sessionConnectionContext.SessionPolicy, policyRequestCorrelationId);
             }
         }
 

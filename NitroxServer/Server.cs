@@ -36,7 +36,6 @@ namespace NitroxServer
 
         public int Port => serverConfig?.ServerPort ?? -1;
 
-
         public Server(WorldPersistence worldPersistence, World world, ServerConfig serverConfig, Communication.NitroxServer server, WorldEntityManager worldEntityManager, EntityRegistry entityRegistry)
         {
             this.worldPersistence = worldPersistence;

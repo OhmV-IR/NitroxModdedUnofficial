@@ -6,7 +6,6 @@ using NitroxModel.DataStructures.GameLogic.Entities;
 using NitroxModel.DataStructures.Util;
 using NitroxModel_Subnautica.DataStructures;
 using UnityEngine;
-using static NitroxModel.DisplayStatusCodes;
 
 namespace NitroxClient.GameLogic.Spawning.WorldEntities;
 
@@ -83,7 +82,7 @@ public class PlayerWorldEntitySpawner : IWorldEntitySpawner
         }
         else
         {
-            DisplayStatusCode(StatusCode.REMOTE_PLAYER_ERR, true, $"Found neither SubRoot component nor EscapePod on {parent.name} for {remotePlayer.PlayerName}.");
+            Log.Error($"Found neither SubRoot component nor EscapePod on {parent.name} for {remotePlayer.PlayerName}.");
         }
     }
 

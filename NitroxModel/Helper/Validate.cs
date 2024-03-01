@@ -1,9 +1,9 @@
-extern alias JB;
+﻿extern alias JB;
 using System;
 using System.Runtime.CompilerServices;
 using JB::JetBrains.Annotations;
 using NitroxModel.DataStructures.Util;
-using static NitroxModel.DisplayStatusCodes;
+
 namespace NitroxModel.Helper;
 
 public static class Validate
@@ -17,14 +17,15 @@ public static class Validate
         {
             return;
         }
-        DisplayStatusCode(StatusCode.INVALID_VARIABLE_VAL, false, "Value was found to be null: " + argumentExpression);
+
+        throw new ArgumentNullException(argumentExpression);
     }
 
     public static void IsTrue(bool b, [CallerArgumentExpression("b")] string argumentExpression = null)
     {
         if (!b)
         {
-            DisplayStatusCode(StatusCode.INVALID_VARIABLE_VAL, false, "Incorrect value was found" + argumentExpression);
+            throw new ArgumentException(argumentExpression);
         }
     }
 
@@ -32,7 +33,6 @@ public static class Validate
     {
         if (b)
         {
-            DisplayStatusCode(StatusCode.INVALID_VARIABLE_VAL, false, "Incorrect value was found" + argumentExpression);
             throw new ArgumentException(argumentExpression);
         }
     }
@@ -41,7 +41,7 @@ public static class Validate
     {
         if (!opt.HasValue)
         {
-            DisplayStatusCode(StatusCode.INVALID_VARIABLE_VAL, false, "A variable was missing");
+            throw new OptionalEmptyException<T>();
         }
         return opt.Value;
     }
@@ -50,7 +50,7 @@ public static class Validate
     {
         if (!opt.HasValue)
         {
-            DisplayStatusCode(StatusCode.INVALID_VARIABLE_VAL, false, "A variable was missing, " + message);
+            throw new OptionalEmptyException<T>(message);
         }
         return opt.Value;
     }

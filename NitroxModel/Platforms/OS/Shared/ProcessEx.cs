@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,8 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Win32.SafeHandles;
 using NitroxModel.Platforms.OS.Windows.Internal;
-using static NitroxServer.Server;
-using static NitroxModel.DisplayStatusCodes;
+
 namespace NitroxModel.Platforms.OS.Shared
 {
     /// <summary>
@@ -144,7 +143,6 @@ namespace NitroxModel.Platforms.OS.Shared
                 string fileName = MainModuleFileName;
                 if (fileName == null)
                 {
-                    DisplayStatusCode(StatusCode.FILE_SYSTEM_ERR, true, "Invalid file name");
                     return null;
                 }
                 return Path.GetDirectoryName(MainModuleFileName);

@@ -1,17 +1,10 @@
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Collections.Generic;
 using NitroxModel.Platforms.OS.Shared;
-using static NitroxServer.Server;
-using static NitroxModel.DisplayStatusCodes;
+
 namespace NitroxModel.Platforms.OS.MacOS
 {
     public sealed class MacFileSystem : FileSystem
     {
-        private bool throwNotImplementedException()
-        {
-            DisplayStatusCode(StatusCode.MISSING_FEATURE, true, "Tried to access a feature that does not exist yet");
-            return false;
-        }
         public override IEnumerable<string> GetDefaultPrograms(string file)
         {
             yield return "open";
@@ -19,10 +12,9 @@ namespace NitroxModel.Platforms.OS.MacOS
 
         public override bool SetFullAccessToCurrentUser(string directory)
         {
-            DisplayStatusCode(StatusCode.MISSING_FEATURE, true, "Tried to access a feature that does not exist yet");
-            return false;
+            throw new System.NotImplementedException();
         }
 
-        public override bool IsTrustedFile(string file) => throwNotImplementedException();
+        public override bool IsTrustedFile(string file) => throw new System.NotImplementedException();
     }
 }

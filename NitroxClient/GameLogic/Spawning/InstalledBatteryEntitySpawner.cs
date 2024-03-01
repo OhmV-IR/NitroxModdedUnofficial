@@ -10,7 +10,6 @@ using NitroxModel.DataStructures.Util;
 using NitroxModel.Packets;
 using NitroxModel_Subnautica.DataStructures;
 using UnityEngine;
-using static NitroxModel.DisplayStatusCodes;
 
 namespace NitroxClient.GameLogic.Spawning;
 
@@ -61,7 +60,6 @@ public class InstalledBatteryEntitySpawner : SyncEntitySpawner<InstalledBatteryE
         if (!NitroxEntity.TryGetObjectFrom(entity.ParentId, out GameObject parentObject))
         {
             energyMixin = null;
-            DisplayStatusCode(StatusCode.SUBNAUTICA_ERROR, false, $"Unable to find parent to install battery {entity}");
             errorLog = $"Unable to find parent to install battery {entity}";
             return false;
         }
@@ -70,7 +68,6 @@ public class InstalledBatteryEntitySpawner : SyncEntitySpawner<InstalledBatteryE
 
         if (!energyMixin)
         {
-            DisplayStatusCode(StatusCode.SUBNAUTICA_ERROR, false, $"Unable to find EnergyMixin on parent to install battery {entity}");
             errorLog = $"Unable to find EnergyMixin on parent to install battery {entity}";
             return false;
         }

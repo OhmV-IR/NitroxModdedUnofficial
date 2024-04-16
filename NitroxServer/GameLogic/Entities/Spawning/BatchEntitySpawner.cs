@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using NitroxModel.DataStructures;
 using NitroxModel.DataStructures.GameLogic;
@@ -97,7 +98,18 @@ public class BatchEntitySpawner : IEntitySpawner
         DeterministicGenerator deterministicBatchGenerator = new DeterministicGenerator(seed, batchId);
         List<EntitySpawnPoint> spawnPoints = batchCellsParser.ParseBatchData(batchId);
         List<Entity> entities = SpawnEntities(spawnPoints, deterministicBatchGenerator);
-
+        if(batchId == new NitroxInt3(19,18,12)) // if current batch is the batch id of the aurora drive room(I think this is the correct batch id, not 100% sure though)
+        {
+            Log.Debug("Attempted to spawn custom poster");
+            NitroxVector3 posterLocation = new NitroxVector3(17, -3, -315);
+            NitroxQuaternion posterRotation = new NitroxQuaternion(0, 0, 0, 0);
+            NitroxVector3 posterScale = new NitroxVector3(1, 1, 1);
+            NitroxTechType posterTechType = new("mycustomposter"); // Need to add an enum to the TechType so that the poster is its own item
+            string posterClassId = "876cbea4-b4bf-4311-8264-5118bfef2241c"; // Corresponds to the prefab of the poster, is unique for each item / state, which I have not created yet
+            NitroxId entityId = new();
+            WorldEntity poster = new(posterLocation, posterRotation, posterScale, posterTechType, 0, posterClassId, true, entityId, null);
+            entities.Add(poster); // doesn't work, might be missing a spawnpoint or something?
+        }
         if (entities.Count == 0)
         {
             lock (emptyBatchesLock)

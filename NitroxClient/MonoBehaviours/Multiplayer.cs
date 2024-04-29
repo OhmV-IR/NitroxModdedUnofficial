@@ -11,6 +11,7 @@ using NitroxClient.GameLogic.ChatUI;
 using NitroxClient.GameLogic.PlayerLogic.PlayerModel.Abstract;
 using NitroxClient.GameLogic.PlayerLogic.PlayerModel.ColorSwap;
 using NitroxClient.MonoBehaviours.Cyclops;
+using NitroxClient.GameLogic.Spawning.WorldEntities;
 using NitroxClient.MonoBehaviours.Discord;
 using NitroxClient.MonoBehaviours.Gui.MainMenu;
 using NitroxClient.MonoBehaviours.Gui.MainMenu.ServerJoin;
@@ -53,7 +54,6 @@ namespace NitroxClient.MonoBehaviours
             packetReceiver = NitroxServiceLocator.LocateService<PacketReceiver>();
             throttledPacketSender = NitroxServiceLocator.LocateService<ThrottledPacketSender>();
             terrain = NitroxServiceLocator.LocateService<GameLogic.Terrain>();
-
             Main = this;
             DontDestroyOnLoad(gameObject);
 

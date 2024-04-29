@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
+
 namespace NitroxClient.GameLogic.Spawning.WorldEntities;
-public partial class DefaultWorldEntitySpawner : IWorldEntitySpawner, IWorldEntitySyncSpawner
+
+public partial class DefaultWorldEntitySpawner
 {
     static DefaultWorldEntitySpawner()
     {
@@ -18,8 +16,8 @@ public partial class DefaultWorldEntitySpawner : IWorldEntitySpawner, IWorldEnti
         GameObject prefab = new();
 
         // REMOVE THIS CONTENT: Make sure to use the same TechType here as in BatchSpawner(or smth).cs
-        RegisterCustomPrefab((TechType)7575, prefab);
-        RegisterCustomPrefab("916cbea4-b4bf-4311-8264-4228bfef2241c", prefab);
+        RegisterCustomPrefab((TechType)2147483547, prefab);
+        RegisterCustomPrefab("916cbea4-b4bf-4311-8264-428bfef2241c", prefab);
     }
 
     public static void RegisterCustomPrefab(TechType techType, GameObject customPrefab)
@@ -29,8 +27,7 @@ public partial class DefaultWorldEntitySpawner : IWorldEntitySpawner, IWorldEnti
             throw new ArgumentException($"Can't register custom prefab {customPrefab.name} because another one is already registered with TechType {techType}.");
         }
         prefabCacheByTechType.Add(techType, customPrefab);
-        Log.Info(techType.ToString());
-        Log.Info($"Successfully register custom prefab {customPrefab.name} with TechType: {techType}");
+        Log.Info($"Successfully registered custom prefab {customPrefab.name} with TechType: {techType}");
     }
 
     public static void RegisterCustomPrefab(string classId, GameObject customPrefab)
@@ -40,6 +37,6 @@ public partial class DefaultWorldEntitySpawner : IWorldEntitySpawner, IWorldEnti
             throw new ArgumentException($"Can't register custom prefab {customPrefab.name} because another one is already registered with class id {classId}.");
         }
         prefabCacheByClassId.Add(classId, customPrefab);
-        Log.Info($"Successfully register custom prefab {customPrefab.name} with class id: {classId}");
+        Log.Info($"Successfully registered custom prefab {customPrefab.name} with class id: {classId}");
     }
 }

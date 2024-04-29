@@ -9,7 +9,6 @@ using NitroxServer.GameLogic.Unlockables;
 using NitroxServer.Helper;
 using NitroxServer.Resources;
 using NitroxServer.Serialization;
-
 namespace NitroxServer.GameLogic.Entities.Spawning;
 
 public class BatchEntitySpawner : IEntitySpawner
@@ -98,17 +97,20 @@ public class BatchEntitySpawner : IEntitySpawner
         DeterministicGenerator deterministicBatchGenerator = new DeterministicGenerator(seed, batchId);
         List<EntitySpawnPoint> spawnPoints = batchCellsParser.ParseBatchData(batchId);
         List<Entity> entities = SpawnEntities(spawnPoints, deterministicBatchGenerator);
-        if(batchId == new NitroxInt3(19,18,12)) // if current batch is the batch id of the aurora drive room(I think this is the correct batch id, not 100% sure though)
+        if(batchId == new NitroxInt3(19,18,12)) // aurora drive room batch id(I think)
         {
             Log.Debug("Attempted to spawn custom poster");
             NitroxVector3 posterLocation = new NitroxVector3(17, -3, -315);
             NitroxQuaternion posterRotation = new NitroxQuaternion(0, 0, 0, 0);
             NitroxVector3 posterScale = new NitroxVector3(1, 1, 1);
-            NitroxTechType posterTechType = new("mycustomposter"); // Need to add an enum to the TechType so that the poster is its own item
-            string posterClassId = "876cbea4-b4bf-4311-8264-5118bfef2241c"; // Corresponds to the prefab of the poster, is unique for each item / state, which I have not created yet
+            NitroxTechType posterTechType = new("customposter"); // 7575 casted to a techtype is the techtype of the custom poster, need to see if I can get the actual name
+            string posterClassId = "916cbea4-b4bf-4311-8264-428bfef2241c"; // Corresponds to the prefab of the poster
             NitroxId entityId = new();
             WorldEntity poster = new(posterLocation, posterRotation, posterScale, posterTechType, 0, posterClassId, true, entityId, null);
-            entities.Add(poster); // doesn't work, might be missing a spawnpoint or something?
+            entities.Add(poster);
+
+            //EntitySpawnPoint posterSpawnPoint = new(, new(0, 0, 0), new(0, 0, 0), new(1, 1, 1), "916cbea4-b4bf-4311-8264-4228bfef2241c");
+            //spawnPoints.Add(posterSpawnPoint);
         }
         if (entities.Count == 0)
         {

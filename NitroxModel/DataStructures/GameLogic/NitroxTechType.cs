@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.Serialization;
 using BinaryPack.Attributes;
 
@@ -75,5 +76,24 @@ public class NitroxTechType : IEquatable<NitroxTechType>
     public override int GetHashCode()
     {
         return 539060726 + EqualityComparer<string>.Default.GetHashCode(Name);
+    }
+    public bool TryParseCustom(out int enumValue)
+    {
+        return customTechTypes.TryGetValue(Name, out enumValue);
+    }
+
+    private static readonly Dictionary<string, int> customTechTypes = [];
+
+    static NitroxTechType()
+    {
+        foreach (FieldInfo field in typeof(CustomTechType).GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
+        {
+            customTechTypes.Add(field.Name, (int)field.GetRawConstantValue());
+        }
+    }
+
+    public enum CustomTechType : int
+    {
+        CUSTOM = 2147483547
     }
 }

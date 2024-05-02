@@ -55,6 +55,10 @@ public static class DataExtensions
 
     public static TechType ToUnity(this NitroxTechType v)
     {
+        if (v.TryParseCustom(out int enumValue))
+        {
+            return (TechType)enumValue;
+        }
         return (TechType)Enum.Parse(typeof(TechType), v.Name);
     }
 

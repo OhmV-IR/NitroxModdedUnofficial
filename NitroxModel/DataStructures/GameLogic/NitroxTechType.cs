@@ -94,6 +94,6 @@ public class NitroxTechType : IEquatable<NitroxTechType>
 
     public enum CustomTechType : int
     {
-        CUSTOM = 2147483547
+        CUSTOM_POSTER = 2147483547
     }
 }

@@ -103,7 +103,7 @@ public class BatchEntitySpawner : IEntitySpawner
             NitroxVector3 posterLocation = new NitroxVector3(17, -3, -315);
             NitroxQuaternion posterRotation = new NitroxQuaternion(0, 0, 0, 0);
             NitroxVector3 posterScale = new NitroxVector3(1, 1, 1);
-            NitroxTechType posterTechType = new("2147483547");
+            NitroxTechType posterTechType = new("CUSTOM_POSTER");
             string posterClassId = "916cbea4-b4bf-4311-8264-428bfef2241c"; // Corresponds to the prefab of the poster
             NitroxId entityId = new();
             WorldEntity poster = new(posterLocation, posterRotation, posterScale, posterTechType, 0, posterClassId, true, entityId, null);

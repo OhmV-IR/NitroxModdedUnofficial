@@ -100,7 +100,7 @@ public class BatchEntitySpawner : IEntitySpawner
         if(batchId == new NitroxInt3(19,18,12)) // aurora drive room batch id(I think)
         {
             Log.Debug("Attempted to spawn custom poster");
-            NitroxVector3 posterLocation = new NitroxVector3(17, -3, -315);
+            NitroxVector3 posterLocation = new NitroxVector3(0,0,0);
             NitroxQuaternion posterRotation = new NitroxQuaternion(0, 0, 0, 0);
             NitroxVector3 posterScale = new NitroxVector3(1, 1, 1);
             NitroxTechType posterTechType = new("CUSTOM_POSTER");

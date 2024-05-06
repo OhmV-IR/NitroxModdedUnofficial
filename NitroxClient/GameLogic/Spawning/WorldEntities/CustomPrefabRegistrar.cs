@@ -1,21 +1,34 @@
 using System;
 using UnityEngine;
-
+using NitroxClient.Unity.Helper;
+using System.Collections;
 namespace NitroxClient.GameLogic.Spawning.WorldEntities;
 
 public partial class DefaultWorldEntitySpawner
 {
     static DefaultWorldEntitySpawner()
     {
-        BuildPosterPrefab();
+       BuildPosterPrefab();
     }
-
-    private static void BuildPosterPrefab()
+    private static IEnumerable BuildPosterPrefab()
     {
-        // REMOVE THIS COMMENT: Do your stuff creating the poster here, you can also import the prefab thanks from an asset bundle
-        GameObject prefab = new();
-
-        // REMOVE THIS CONTENT: Make sure to use the same TechType here as in BatchSpawner(or smth).cs
+        
+        TaskResult<GameObject> result = new();
+        yield return RequestPrefab(TechType.PosterAurora, result);
+        GameObject prefab = result.Get();
+        yield return AssetBundleLoader.LoadAllAssets(AssetBundleLoader.NitroxAssetBundle.CUSTOM_POSTER_TEXTURE);
+        foreach(UnityEngine.Object asset in AssetBundleLoader.NitroxAssetBundle.CUSTOM_POSTER_TEXTURE.LoadedAssets)
+        {
+            if(asset is Texture texture)
+            {
+                if (asset.name.Equals("custompostertexture"))
+                {
+                    prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().material.mainTexture = texture;
+                    break;
+                }
+            }
+        }
+        prefab.name = "Nitrox poster";
         RegisterCustomPrefab((TechType)2147483547, prefab);
         RegisterCustomPrefab("916cbea4-b4bf-4311-8264-428bfef2241c", prefab);
     }

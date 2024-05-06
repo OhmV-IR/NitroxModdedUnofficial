@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.IO;
 using NitroxModel.Helper;
 using UnityEngine;
@@ -101,5 +101,6 @@ public static class AssetBundleLoader
         public static readonly NitroxAssetBundle CHAT_LOG =  new("chatlog");
         public static readonly NitroxAssetBundle CHAT_KEY_HINT =  new("chatkeyhint");
         public static readonly NitroxAssetBundle DISCORD_JOIN_REQUEST = new("discordjoinrequest");
+        public static readonly NitroxAssetBundle CUSTOM_POSTER_TEXTURE = new("custompostertexture");
     }
 }

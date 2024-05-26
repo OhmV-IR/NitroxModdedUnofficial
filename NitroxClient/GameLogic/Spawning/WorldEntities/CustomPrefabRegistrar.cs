@@ -2,17 +2,19 @@ using System;
 using UnityEngine;
 using NitroxClient.Unity.Helper;
 using System.Collections;
+using UWE;
 namespace NitroxClient.GameLogic.Spawning.WorldEntities;
 
 public partial class DefaultWorldEntitySpawner
 {
     static DefaultWorldEntitySpawner()
     {
-       BuildPosterPrefab();
+       Debug.Log("default world entity spawner initialized");
+       CoroutineHost.StartCoroutine(BuildPosterPrefab());
     }
-    private static IEnumerable BuildPosterPrefab()
+    private static IEnumerator BuildPosterPrefab()
     {
-        
+        // This function doesn't seem to be running
         TaskResult<GameObject> result = new();
         yield return RequestPrefab(TechType.PosterAurora, result);
         GameObject prefab = result.Get();

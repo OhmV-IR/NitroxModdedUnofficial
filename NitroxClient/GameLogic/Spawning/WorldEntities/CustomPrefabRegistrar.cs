@@ -9,23 +9,29 @@ public partial class DefaultWorldEntitySpawner
 {
     static DefaultWorldEntitySpawner()
     {
-       Debug.Log("default world entity spawner initialized");
-       CoroutineHost.StartCoroutine(BuildPosterPrefab());
+       Log.Info("default world entity spawner initialized");
+        CoroutineHost.StartCoroutine(BuildPosterPrefab());
     }
     private static IEnumerator BuildPosterPrefab()
     {
-        // This function doesn't seem to be running
         TaskResult<GameObject> result = new();
         yield return RequestPrefab(TechType.PosterAurora, result);
         GameObject prefab = result.Get();
         yield return AssetBundleLoader.LoadAllAssets(AssetBundleLoader.NitroxAssetBundle.CUSTOM_POSTER_TEXTURE);
-        foreach(UnityEngine.Object asset in AssetBundleLoader.NitroxAssetBundle.CUSTOM_POSTER_TEXTURE.LoadedAssets)
+        foreach (UnityEngine.Object asset in AssetBundleLoader.NitroxAssetBundle.CUSTOM_POSTER_TEXTURE.LoadedAssets)
         {
-            if(asset is Texture texture)
+            if (asset is Texture texture)
             {
                 if (asset.name.Equals("custompostertexture"))
                 {
-                    prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().material.mainTexture = texture;
+                    var mats = prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().materials;
+                    for (int i = 0; i < mats.Length; i++)
+                    {
+                        mats[i].mainTexture = texture;
+                    }
+                    prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().materials = mats;
+                    Log.Info("Materials length below");
+                    Log.Info(prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().materials.Length);
                     break;
                 }
             }

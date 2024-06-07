@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using NitroxModel.DataStructures;
+using NitroxModel.DataStructures.GameLogic;
 using NitroxModel.DataStructures.GameLogic.Entities;
 using NitroxModel.DataStructures.Util;
 using NitroxModel_Subnautica.DataStructures;
+using rail;
 using UnityEngine;
 using UWE;
 using static NitroxClient.Unity.Helper.GameObjectHelper;
@@ -20,11 +22,14 @@ public partial class DefaultWorldEntitySpawner : IWorldEntitySpawner, IWorldEnti
     public IEnumerator SpawnAsync(WorldEntity entity, Optional<GameObject> parent, EntityCell cellRoot, TaskResult<Optional<GameObject>> result)
     {
         TechType techType = entity.TechType.ToUnity();
-
         TaskResult<GameObject> gameObjectResult = new();
         yield return CreateGameObject(techType, entity.ClassId, entity.Id, gameObjectResult);
 
         GameObject gameObject = gameObjectResult.Get();
+        if(gameObject.name == "Nitrox poster")
+        {
+            Log.Info("Custom poster object spawned");
+        }
         SetupObject(entity, parent, gameObject, cellRoot, techType);
 
         result.Set(Optional.Of(gameObject));
@@ -32,6 +37,10 @@ public partial class DefaultWorldEntitySpawner : IWorldEntitySpawner, IWorldEnti
 
     private void SetupObject(WorldEntity entity, Optional<GameObject> parent, GameObject gameObject, EntityCell cellRoot, TechType techType)
     {
+        if (gameObject.name == "Nitrox poster")
+        {
+            Log.Info("Custom poster object spawned");
+        }
         gameObject.transform.position = entity.Transform.Position.ToUnity();
         gameObject.transform.rotation = entity.Transform.Rotation.ToUnity();
         gameObject.transform.localScale = entity.Transform.LocalScale.ToUnity();
@@ -170,10 +179,13 @@ public partial class DefaultWorldEntitySpawner : IWorldEntitySpawner, IWorldEnti
     public bool SpawnSync(WorldEntity entity, Optional<GameObject> parent, EntityCell cellRoot, TaskResult<Optional<GameObject>> result)
     {
         TechType techType = entity.TechType.ToUnity();
-        
         if (TryCreateGameObjectSync(techType, entity.ClassId, entity.Id, out GameObject gameObject))
         {
             SetupObject(entity, parent, gameObject, cellRoot, techType);
+            if (gameObject.name == "Nitrox poster")
+            {
+                Log.Info("Custom poster object spawned");
+            }
             result.Set(gameObject);
             return true;
         }

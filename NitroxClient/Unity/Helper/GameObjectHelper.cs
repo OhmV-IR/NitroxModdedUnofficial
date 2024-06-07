@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using NitroxClient.MonoBehaviours;
 using NitroxModel.DataStructures;
@@ -174,6 +174,10 @@ namespace NitroxClient.Unity.Helper
         public static GameObject SpawnFromPrefab(GameObject prefab, NitroxId nitroxId, Transform parent = null)
         {
             GameObject gameObject = InstantiateWithId(prefab, nitroxId);
+            if (prefab.name == "Nitrox poster")
+            {
+                Log.Info("Custom poster object spawned");
+            }
             gameObject.transform.parent = parent;
             return gameObject;
         }

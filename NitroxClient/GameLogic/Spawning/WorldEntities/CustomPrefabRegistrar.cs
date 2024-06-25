@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using NitroxClient.Unity.Helper;
 using System.Collections;
+using System.Collections.Generic;
 using UWE;
 namespace NitroxClient.GameLogic.Spawning.WorldEntities;
 
@@ -9,7 +10,7 @@ public partial class DefaultWorldEntitySpawner
 {
     static DefaultWorldEntitySpawner()
     {
-       Log.Info("default world entity spawner initialized");
+        Log.Info("default world entity spawner initialized");
         CoroutineHost.StartCoroutine(BuildPosterPrefab());
     }
     private static IEnumerator BuildPosterPrefab()
@@ -27,7 +28,15 @@ public partial class DefaultWorldEntitySpawner
                     var mats = prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().materials;
                     for (int i = 0; i < mats.Length; i++)
                     {
-                        mats[i].mainTexture = texture;
+                        Shader shader = mats[i].shader;
+                        for (int j = 0; j < shader.GetPropertyCount(); j++)
+                        {
+                            if (shader.GetPropertyType(j) == UnityEngine.Rendering.ShaderPropertyType.Texture)
+                            {
+                                mats[i].SetTexture(shader.GetPropertyName(j), texture);
+                            }
+                        }
+                        Log.Info(shader.GetPropertyCount());
                     }
                     prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().materials = mats;
                     Log.Info("Materials length below");

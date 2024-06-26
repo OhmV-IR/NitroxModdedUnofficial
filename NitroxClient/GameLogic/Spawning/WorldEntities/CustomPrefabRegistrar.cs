@@ -26,25 +26,19 @@ public partial class DefaultWorldEntitySpawner
                 if (asset.name.Equals("custompostertexture"))
                 {
                     var mats = prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().materials;
-                    for (int i = 0; i < mats.Length; i++)
-                    {
-                        Shader shader = mats[i].shader;
-                        for (int j = 0; j < shader.GetPropertyCount(); j++)
+                    Shader shader = mats[1].shader;
+                    for (int j = 0; j < shader.GetPropertyCount(); j++)
                         {
                             if (shader.GetPropertyType(j) == UnityEngine.Rendering.ShaderPropertyType.Texture)
                             {
-                                mats[i].SetTexture(shader.GetPropertyName(j), texture);
+                                mats[1].SetTexture(shader.GetPropertyName(j), texture);
                             }
                         }
-                        Log.Info(shader.GetPropertyCount());
-                    }
                     prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().materials = mats;
-                    Log.Info("Materials length below");
-                    Log.Info(prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().materials.Length);
                     break;
                 }
+                }
             }
-        }
         prefab.name = "Nitrox poster";
         RegisterCustomPrefab((TechType)2147483547, prefab);
         RegisterCustomPrefab("916cbea4-b4bf-4311-8264-428bfef2241c", prefab);
@@ -68,5 +62,36 @@ public partial class DefaultWorldEntitySpawner
         }
         prefabCacheByClassId.Add(classId, customPrefab);
         Log.Info($"Successfully registered custom prefab {customPrefab.name} with class id: {classId}");
+    }
+}
+public class UpdatePoster : MonoBehaviour
+{
+    public Texture texture;
+    public int jCap;
+    public int iCap;
+    public void UpdatePosterWithTexture()
+    {
+        var mats = gameObject.GetComponent<MeshRenderer>().materials;
+        for (int i = 0; i < mats.Length; i++)
+        {
+            Shader shader = mats[i].shader;
+            Log.Info("Shader length below");
+            Log.Info(shader.GetPropertyCount());
+
+            for (int j = 0; j < shader.GetPropertyCount(); j++)
+            {
+                if (shader.GetPropertyType(j) == UnityEngine.Rendering.ShaderPropertyType.Texture)
+                {
+                    if (j > jCap) { }
+                    else
+                    {
+                        mats[i].SetTexture(shader.GetPropertyName(j), texture);
+                    }
+                }
+            }
+        }
+        gameObject.GetComponent<MeshRenderer>().materials = mats;
+        Log.Info("Materials length below");
+        Log.Info(gameObject.GetComponent<MeshRenderer>().materials.Length);
     }
 }

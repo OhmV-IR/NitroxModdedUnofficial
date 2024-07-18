@@ -41,6 +41,7 @@ public partial class DefaultWorldEntitySpawner
         }
         prefab.AddComponent<UpdatePosterLocation>();
         prefab.GetComponent<UpdatePosterLocation>().posterLocation = new Vector3(976.4f, 11.5f, -69.4f);
+        prefab.GetComponent<UpdatePosterLocation>().posterRotation = Quaternion.Euler(new Vector3(0, 0, 0));
         prefab.name = "Nitrox poster";
         RegisterCustomPrefab((TechType)2147483547, prefab);
         RegisterCustomPrefab("916cbea4-b4bf-4311-8264-428bfef2241c", prefab);
@@ -69,16 +70,15 @@ public partial class DefaultWorldEntitySpawner
 public class UpdatePosterLocation : MonoBehaviour
 {
     public Vector3 posterLocation;
-    public UpdatePosterLocation(Vector3 posterLocation)
-    {
-        this.posterLocation = posterLocation;
-    }
+    public Quaternion posterRotation;
     public void Start()
     {
-        gameObject.transform.position = posterLocation;
-    }
-    public void ManuallyUpdatePos()
-    {
-        gameObject.transform.position = posterLocation;
+        if (posterLocation != null)
+        {
+            gameObject.transform.position = posterLocation;
+        }
+        if (posterRotation != null) {
+            gameObject.transform.rotation = posterRotation;
+        }
     }
 }

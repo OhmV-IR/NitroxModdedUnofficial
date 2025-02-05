@@ -17,13 +17,13 @@ public class ToStringConverter : Converter<ToStringConverter>
         {
             return null;
         }
-
+        string sourceText; // removed the if (value is not string sourceText) because it simplifies to an if is not null check because sourceText is not declared prior
+        // and we already check for the null condition in above if clause
         if (value.GetType().IsEnum)
         {
-            value = (value as Enum)?.GetAttribute<DescriptionAttribute>()?.Description ?? value.ToString();
+            sourceText = (value as Enum)?.GetAttribute<DescriptionAttribute>()?.Description ?? value.ToString();
         }
-
-        if (value is not string sourceText)
+        else
         {
             sourceText = value?.ToString();
         }
@@ -32,7 +32,6 @@ public class ToStringConverter : Converter<ToStringConverter>
         {
             return new BindingNotification(new InvalidCastException(), BindingErrorType.Error);
         }
-
         return parameter switch
         {
             "upper" => sourceText.ToUpperInvariant(),

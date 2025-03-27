@@ -1,8 +1,7 @@
 using System;
-using UnityEngine;
-using NitroxClient.Unity.Helper;
 using System.Collections;
-using System.Collections.Generic;
+using NitroxClient.Unity.Helper;
+using UnityEngine;
 using UWE;
 namespace NitroxClient.GameLogic.Spawning.WorldEntities;
 
@@ -10,10 +9,9 @@ public partial class DefaultWorldEntitySpawner
 {
     static DefaultWorldEntitySpawner()
     {
-        Log.Info("default world entity spawner initialized");
-        CoroutineHost.StartCoroutine(BuildPosterPrefab());
+        CoroutineHost.StartCoroutine(BuildTeamPosterPrefab());
     }
-    private static IEnumerator BuildPosterPrefab()
+    private static IEnumerator BuildTeamPosterPrefab()
     {
         TaskResult<GameObject> result = new();
         yield return RequestPrefab(TechType.PosterAurora, result);
@@ -25,7 +23,7 @@ public partial class DefaultWorldEntitySpawner
             {
                 if (asset.name.Equals("custompostertexture"))
                 {
-                    var mats = prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().materials;
+                    Material[] mats = prefab.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().materials;
                     Shader shader = mats[1].shader;
                     for (int j = 0; j < shader.GetPropertyCount(); j++)
                     {
@@ -40,9 +38,9 @@ public partial class DefaultWorldEntitySpawner
             }
         }
         prefab.AddComponent<UpdatePosterLocation>();
-        prefab.GetComponent<UpdatePosterLocation>().posterLocation = new Vector3(976.4f, 11.5f, -69.4f);
-        prefab.GetComponent<UpdatePosterLocation>().posterRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        prefab.name = "Nitrox poster";
+        prefab.GetComponent<UpdatePosterLocation>().posterLocation = new Vector3(972f, 11.75f, -74.6f);
+        prefab.GetComponent<UpdatePosterLocation>().posterRotation = Quaternion.Euler(new Vector3(0, 46, 0));
+        prefab.name = "Nitrox team poster";
         RegisterCustomPrefab((TechType)2147483547, prefab);
         RegisterCustomPrefab("916cbea4-b4bf-4311-8264-428bfef2241c", prefab);
     }

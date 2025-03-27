@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using NitroxModel.DataStructures;
 using NitroxModel.DataStructures.GameLogic;
@@ -59,6 +58,7 @@ public class BatchEntitySpawner : IEntitySpawner
     }
 
     private static readonly NitroxQuaternion prefabZUpRotation = NitroxQuaternion.FromEuler(new(-90f, 0f, 0f));
+    private static readonly NitroxInt3 teamPosterBatchId = new(18, 19, 12);
 
     public BatchEntitySpawner(EntitySpawnPointFactory entitySpawnPointFactory, IUweWorldEntityFactory worldEntityFactory, IUwePrefabFactory prefabFactory, List<NitroxInt3> loadedPreviousParsed, ServerProtoBufSerializer serializer,
                               IEntityBootstrapperManager entityBootstrapperManager, Dictionary<string, PrefabPlaceholdersGroupAsset> placeholdersGroupsByClassId, PDAStateData pdaStateData, RandomSpawnSpoofer randomSpawnSpoofer, string seed)
@@ -97,20 +97,15 @@ public class BatchEntitySpawner : IEntitySpawner
         DeterministicGenerator deterministicBatchGenerator = new DeterministicGenerator(seed, batchId);
         List<EntitySpawnPoint> spawnPoints = batchCellsParser.ParseBatchData(batchId);
         List<Entity> entities = SpawnEntities(spawnPoints, deterministicBatchGenerator);
-        if(batchId == new NitroxInt3(19,18,12)) // aurora drive room batch id(I think)
+        if(batchId == teamPosterBatchId) // aurora drive room batch id(I think)
         {
-            Log.Debug("Attempted to spawn custom poster");
-            NitroxVector3 posterLocation = new(17, -3, -315);
-            NitroxQuaternion posterRotation = new(0, 0, 0, 0);
-            NitroxVector3 posterScale = new(1, 1, 1);
             NitroxTechType posterTechType = new("CUSTOM_POSTER");
             string posterClassId = "916cbea4-b4bf-4311-8264-428bfef2241c"; // Corresponds to the prefab of the poster
             NitroxId entityId = new();
-            WorldEntity poster = new(posterLocation, posterRotation, posterScale, posterTechType, 0, posterClassId, true, entityId, null);
+            WorldEntity poster = new(NitroxVector3.Zero, NitroxQuaternion.Identity, NitroxVector3.One, posterTechType, 0, posterClassId, true, entityId, null);
             CellRootEntity parentCellRoot = entities.OfType<CellRootEntity>().FirstOrDefault();
             if (parentCellRoot != default)
             {
-                Log.Debug("added child");
                 poster.Transform.SetParent(parentCellRoot.Transform, false);
                 poster.ParentId = parentCellRoot.Id;
                 parentCellRoot.ChildEntities.Add(poster);

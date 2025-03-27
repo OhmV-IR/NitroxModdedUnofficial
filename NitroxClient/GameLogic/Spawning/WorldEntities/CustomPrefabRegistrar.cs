@@ -69,8 +69,17 @@ public class UpdatePosterLocation : MonoBehaviour
 {
     public Vector3 posterLocation;
     public Quaternion posterRotation;
+    private static bool activePoster = false;
     public void Start()
     {
+        if (!activePoster)
+        {
+            activePoster = true;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         if (posterLocation != null)
         {
             gameObject.transform.position = posterLocation;

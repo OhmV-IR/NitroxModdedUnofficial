@@ -49,7 +49,7 @@ public class PatchesTranspilerTest
         [typeof(FireExtinguisherHolder_TryStoreTank_Patch), 3],
         [typeof(Flare_Update_Patch), 0],
         [typeof(FootstepSounds_OnStep_Patch), 6],
-        [typeof(GameInput_Initialize_Patch), 5],
+        //[typeof(GameInput_Initialize_Patch), 5],
         [typeof(GrowingPlant_SpawnGrownModelAsync_Patch), -1],
         [typeof(Player_TriggerInfectionRevealAsync_Patch), 1],
         [typeof(IngameMenu_OnSelect_Patch), -2],
@@ -73,11 +73,13 @@ public class PatchesTranspilerTest
         [typeof(SubConsoleCommand_OnConsoleCommand_sub_Patch), 0],
         [typeof(Trashcan_Update_Patch), 4],
         [typeof(uGUI_OptionsPanel_AddAccessibilityTab_Patch), -10],
+#if false
         [typeof(uGUI_PDA_Initialize_Patch), 2],
         [typeof(uGUI_PDA_SetTabs_Patch), 3],
         [typeof(uGUI_Pings_IsVisibleNow_Patch), 0],
         [typeof(uGUI_SceneIntro_HandleInput_Patch), -2],
         [typeof(uGUI_SceneIntro_IntroSequence_Patch), 8],
+#endif
         [typeof(uSkyManager_SetVaryingMaterialProperties_Patch), 0],
         [typeof(Welder_Weld_Patch), 1],
         [typeof(Poop_Perform_Patch), 1],

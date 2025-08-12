@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+/*using System.Reflection;
 using NitroxClient.MonoBehaviours.Gui.Input;
 using NitroxClient.MonoBehaviours.Gui.Input.KeyBindings;
 using NitroxModel.Helper;
@@ -22,3 +22,4 @@ namespace NitroxPatcher.Patches.Persistent
         }
     }
 }
+*/

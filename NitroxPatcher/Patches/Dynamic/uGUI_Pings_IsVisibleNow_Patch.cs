@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+#if false
+using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -36,3 +37,5 @@ public sealed partial class uGUI_Pings_IsVisibleNow_Patch : NitroxPatch, IDynami
         return Resolve<NitroxPDATabManager>().CustomTabs.TryGetValue(uGUI_PDA.main.currentTabType, out NitroxPDATab nitroxTab) && nitroxTab.KeepPingsVisible;
     }
 }
+
+#endif

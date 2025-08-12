@@ -1,4 +1,5 @@
-﻿using System;
+#if false
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -72,3 +73,4 @@ public sealed partial class uGUI_PDA_SetTabs_Patch : NitroxPatch, IDynamicPatch
         }
     }
 }
+#endif

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Linq;
 using FMODUnity;
@@ -133,7 +133,7 @@ public class MainMenuCreateServerPanel : MonoBehaviour, uGUI_INavigableIconGrid,
 
     private void Update()
     {
-        if (GameInput.GetKeyDown(KeyCode.Tab))
+        /*if (GameInput.GetKeyDown(KeyCode.Tab))
         {
             if (GameInput.GetKey(KeyCode.LeftShift))
             {
@@ -147,7 +147,7 @@ public class MainMenuCreateServerPanel : MonoBehaviour, uGUI_INavigableIconGrid,
         else if (selectedItem && GameInput.GetKeyDown(KeyCode.Return))
         {
             OnConfirm();
-        }
+        }*/
     }
 
     public void OnBack()

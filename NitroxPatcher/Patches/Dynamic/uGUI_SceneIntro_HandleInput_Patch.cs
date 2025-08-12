@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+
+#if false
+using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -44,7 +46,7 @@ public sealed partial class uGUI_SceneIntro_HandleInput_Patch : NitroxPatch, IDy
         {
             Resolve<PlayerCinematics>().SetLocalIntroCinematicMode(IntroCinematicMode.SINGLEPLAYER);
             GameInput.ClearInput();
-            ResetTimeDownForButton(GameInput.Button.UIMenu);
+            //ResetTimeDownForButton(GameInput.Button.UIMenu);
             uGUI_SceneIntro_IntroSequence_Patch.EnqueueStartCinematic(instance);
             return true;
         }
@@ -61,7 +63,7 @@ public sealed partial class uGUI_SceneIntro_HandleInput_Patch : NitroxPatch, IDy
     }
 
     // Partial copied from GameInput.GetInputStateForButton()
-    private static void ResetTimeDownForButton(GameInput.Button button)
+ /*   private static void ResetTimeDownForButton(GameInput.Button button)
     {
         for (int index1 = 0; index1 < GameInput.numDevices; ++index1)
         {
@@ -77,5 +79,7 @@ public sealed partial class uGUI_SceneIntro_HandleInput_Patch : NitroxPatch, IDy
                 }
             }
         }
-    }
+    }*/
 }
+
+#endif

@@ -219,10 +219,10 @@ public class MainMenuJoinServerPanel : MonoBehaviour, uGUI_INavigableIconGrid, u
         if (selectedItem == selectableItems[1])
         {
             colorPicker.pointer.GetComponent<Image>().color = Color.cyan;
-            if (GameInput.GetPrimaryDevice() == GameInput.Device.Controller)
+            /*if (GameInput.GetPrimaryDevice() == GameInput.Device.Controller)
             {
                 colorPickerPreview.OnPointerDown(null);
-            }
+            }*/
         }
         else if (selectedItem == selectableItems[3] || selectedItem == selectableItems[4])
         {
@@ -259,11 +259,11 @@ public class MainMenuJoinServerPanel : MonoBehaviour, uGUI_INavigableIconGrid, u
         {
             Image colorPickerPointer = selectedColorPicker.pointer.GetComponent<Image>();
 
-            if (colorPickerPointer.color != Color.white &&
+            /*if (colorPickerPointer.color != Color.white &&
                 GameInput.GetPrimaryDevice() == GameInput.Device.Controller)
             {
                 colorPickerPreview.OnPointerUp(null);
-            }
+            }*/
             colorPickerPointer.color = Color.white;
         }
         else if (selectedItem.TryGetComponentInChildren(out uGUI_BasicColorSwap colorSwap))

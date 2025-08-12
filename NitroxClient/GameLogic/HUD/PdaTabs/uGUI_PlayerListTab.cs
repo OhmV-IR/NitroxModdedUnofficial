@@ -17,7 +17,7 @@ namespace NitroxClient.GameLogic.HUD.PdaTabs;
 /// </summary>
 public class uGUI_PlayerListTab : uGUI_PingTab
 {
-    private NitroxPDATabManager nitroxPDATabManager;
+    //private NitroxPDATabManager nitroxPDATabManager;
     private PlayerManager playerManager;
     private LocalPlayer localPlayer;
     private IPacketSender packetSender;
@@ -43,7 +43,7 @@ public class uGUI_PlayerListTab : uGUI_PingTab
             return false;
         });
 
-        nitroxPDATabManager = NitroxServiceLocator.LocateService<NitroxPDATabManager>();
+        //nitroxPDATabManager = NitroxServiceLocator.LocateService<NitroxPDATabManager>();
         playerManager = NitroxServiceLocator.LocateService<PlayerManager>();
         localPlayer = NitroxServiceLocator.LocateService<LocalPlayer>();
         packetSender = NitroxServiceLocator.LocateService<IPacketSender>();
@@ -75,7 +75,7 @@ public class uGUI_PlayerListTab : uGUI_PingTab
             {
                 if (asset.name.Equals("player_list_tab@3x"))
                 {
-                    nitroxPDATabManager.AddTabSprite(asset.name, new Atlas.Sprite(sprite));
+                    //nitroxPDATabManager.AddTabSprite(asset.name, new Atlas.Sprite(sprite));
                 }
                 assets.Add(asset.name, sprite);
             }

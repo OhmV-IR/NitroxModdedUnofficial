@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+#if false
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using NitroxClient.GameLogic.HUD;
@@ -36,3 +37,5 @@ public sealed partial class uGUI_PDA_CacheToolbarTooltips_Patch : NitroxPatch, I
         }
     }
 }
+
+#endif

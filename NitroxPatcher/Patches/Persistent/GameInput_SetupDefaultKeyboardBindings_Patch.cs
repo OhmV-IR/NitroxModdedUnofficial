@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+/*using System.Reflection;
 using NitroxClient.MonoBehaviours.Gui.Input;
 using NitroxClient.MonoBehaviours.Gui.Input.KeyBindings;
 using NitroxModel.Helper;
@@ -24,3 +24,4 @@ public partial class GameInput_SetupDefaultKeyboardBindings_Patch : NitroxPatch,
         }
     }
 }
+*/

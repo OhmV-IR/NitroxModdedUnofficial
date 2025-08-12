@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+#if false
+using System.Collections.Generic;
 
 namespace NitroxClient.GameLogic.HUD;
 
@@ -41,3 +42,5 @@ public class NitroxPDATabManager
         }
     }
 }
+
+#endif

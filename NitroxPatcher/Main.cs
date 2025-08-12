@@ -10,6 +10,7 @@ using JB::JetBrains.Annotations;
 using Microsoft.Win32;
 using NitroxModel.Helper;
 using NitroxModel_Subnautica.Logger;
+using NitroxPatcher.Patches.Persistent;
 using UnityEngine;
 
 namespace NitroxPatcher;
@@ -131,6 +132,8 @@ public static class Main
             // Placeholder for popup gui
             Log.Error(ex, "Unhandled exception occurred while initializing Nitrox:");
         }
+
+        GameInputSystem_Initialize_Patch.AddNitroxBindings();
     }
 
     /// <summary>

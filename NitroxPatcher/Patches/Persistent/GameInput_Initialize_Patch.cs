@@ -1,4 +1,5 @@
-﻿using System;
+#if false
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -41,3 +42,4 @@ namespace NitroxPatcher.Patches.Persistent
         }
     }
 }
+#endif

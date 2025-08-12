@@ -117,7 +117,7 @@ namespace NitroxClient
             containerBuilder.RegisterType<NitroxSettingsManager>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<ThrottledPacketSender>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<PlayerCinematics>().InstancePerLifetimeScope();
-            containerBuilder.RegisterType<NitroxPDATabManager>().InstancePerLifetimeScope();
+            //containerBuilder.RegisterType<NitroxPDATabManager>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<TimeManager>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<BulletManager>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<NtpSyncer>().InstancePerLifetimeScope();

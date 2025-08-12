@@ -28,7 +28,7 @@ public sealed partial class uGUI_SceneIntro_IntroSequence_Patch : NitroxPatch, I
                .RemoveInstruction()
                // Replace GameInput.AnyKeyDown() check with AnyKeyDownOrSubstitute()
                .MatchEndForward(
-                   new CodeMatch(OpCodes.Call, Reflect.Method(() => GameInput.AnyKeyDown()))
+                   new CodeMatch(OpCodes.Call, Reflect.Property(() => Input.anyKeyDown).GetGetMethod())
                )
                .SetOperandAndAdvance(Reflect.Method(() => AnyKeyDownOrSubstitute()))
                // Insert custom check if cinematic should be started => waiting for other player & enable skip functionality

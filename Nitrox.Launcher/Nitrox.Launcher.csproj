@@ -50,11 +50,11 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Update="Nitrox.Analyzers" Version="1.0.12">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
-    
+
     <!-- Temp fix for Avalonia 11.3 bug: https://github.com/AvaloniaUI/Avalonia/discussions/18971#discussioncomment-13533852 -->
     <ItemGroup Condition="$(_IsLinux) or $(_IsLinuxTarget)">
         <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="3.116.1" />
@@ -83,23 +83,21 @@
     <!-- See: https://github.com/dotnet/msbuild/issues/5599 -->
     <Target Name="_NitroxFixBuildInsideVisualStudio" AfterTargets="$(_NitroxMoveDependenciesToLibTaskName)" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
 
-        <Message Importance="High"
-                 Text="Running _FixBuildInsideVisualStudio on $(MSBuildProjectName)" />
+        <Message Importance="High" Text="Running _FixBuildInsideVisualStudio on $(MSBuildProjectName)" />
 
         <ItemGroup>
             <_FilesToCopy Include="$(MSBuildProjectDirectory)\..\NitroxPatcher\bin\$(Configuration)\net472\*" />
         </ItemGroup>
 
-        <Error Text="Unable to find NitroxPatcher files from _NitroxFixBuildInsideVisualStudio"
-               Condition="@(_FilesToCopy->Count()) == 0" />
+        <Error Text="Unable to find NitroxPatcher files from _NitroxFixBuildInsideVisualStudio" Condition="@(_FilesToCopy-&gt;Count()) == 0" />
 
-        <Copy SourceFiles="@(_FilesToCopy)"
-              DestinationFolder="$(MSBuildProjectDirectory)\$(OutputPath)\lib\net472\"
-              OverwriteReadOnlyFiles="True"
-              Retries="3"
-              RetryDelayMilliseconds="100"
-              SkipUnchangedFiles="True" />
+        <Copy SourceFiles="@(_FilesToCopy)" DestinationFolder="$(MSBuildProjectDirectory)\$(OutputPath)\lib\net472\" OverwriteReadOnlyFiles="True" Retries="3" RetryDelayMilliseconds="100" SkipUnchangedFiles="True" />
 
+    </Target>
+
+    <Target Name="PackedServer" Condition="'$(Configuration)' == 'Release'" AfterTargets="_NitroxFixBuildInsideVisualStudio">
+        <Exec Command="wsl --install Ubuntu-24.04 --no-launch" IgnoreExitCode="true" />
+        <Exec Command="wsl -d Ubuntu-24.04"></Exec>
     </Target>
 
     <ItemGroup>
